@@ -1,0 +1,12 @@
+Kleines PHP Framework zum
+- Basteln
+- Überdenken von Programmierstrategien
+- Sammeln von Tools, die man immer mal wieder braucht.
+
+Aktuell ist das Framework auf den Umgang mit Daten aus verschiedenen Datenquellen ausgelegt mit Funktionen zum 
+- Laden, 
+- Validieren,
+- Mapping und
+- Speichern
+
+von CSV-Daten.
