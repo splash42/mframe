@@ -120,6 +120,13 @@ class View{
 		print_r($msg);
 	}
 	
+	/** Setzt ein Basis-Template
+	 * @param: $url: Url inkl. mit Pfad ab TPL-Root */
+	public static function LOAD_TEMPLATE($url){
+		View::$OUTPUT	= File::READ(Core::$TPL.$url,'str');
+	}
+	
+	
 	/** Array mit Template-Informationen verarbeiten */
 	public static function SET_TEMPLATES($tplList){
 
@@ -154,6 +161,15 @@ class View{
 		
 		// Zusammensetzen
 	}
+	
+	/** Ersetzt einen TAG durch einen Wert */
+	public static function SET_TAG($tag,$value){
+		$s	= '/##'.$tag.'##/i';
+		$r	= $value;
+		
+		View::$OUTPUT	= preg_replace($s, $r, View::$OUTPUT);
+	}
+	
 	
 	/** Ersetzt evt. TAGs in den Dateinamen  */
 	private static function FORMAT_FILENAME(){

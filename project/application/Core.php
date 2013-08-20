@@ -22,7 +22,9 @@ class Core{
 	// Fehlermeldungen
 	private static $MSG_ERROR	= array();
 
+	// Ausgabe
 	private $view;
+	public static $SHOW;
 
 	private static $DB;
 	
@@ -160,9 +162,12 @@ class Core{
 		// # (3) - Seite ausgeben # ------------ 
 		if($route['intern']){
 			return View::$OUTPUT;
-		} 
-		View::SHOW();
-
+		}else{
+			if(Core::$SHOW){
+				View::SHOW();				
+			}
+		}
+		
 		
 		// # (4) - Logfile ausgeben # ------------  
 		if(User::INPUT('trace','text')){
