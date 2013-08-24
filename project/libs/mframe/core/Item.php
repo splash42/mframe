@@ -3,33 +3,29 @@
 abstract class Item {		    
     public $werte  = array();
 	
-    protected $tab;
+	// Zugehörige Item-Tabelle
+	protected $tab;
 	
-	protected $mode		= "complete";
+	// Tabellen Key
+	protected $key		= 'id';
 	
+	// Soll gespeichert werden
 	protected $valid	= true;
-    
-	/** Setzt den Active-Wert für alle Einträge einer Tabelle zurück */
-    static public function RESET($tab,$id){
-        $dbset  = DBset::INIT('');
-        $sql    = 'UPDATE '.$tab.' SET active=0';
-		if($id){
-			$sql .= " WHERE id='".$id."'";
-		}
-        $dbset->raw($sql);
-    }
-    
-    /** Speichert ein Objekt in der DB */
-    public function save(){
-        $dbset  = DBset::INIT();
-		
+	
+	
+	/** Speichert das Objekt */
+	public function save(){
+		$db	= DBpdo::INIT();
+
 		if($this->valid==true){
 			// print_r($this->werte);
-			$dbset->set($this->tab,$this->werte);
+			$db->set($this->tab,$this->werte,$this->key);
 		}else{			
-			Core::$VIEW->ping("#i ".$this->werte['id']);
-		}
-    }
+			Core::LOG_ERROR('Objekt ist nicht gültig!');
+		}		
+	}
+	
+	
 	
 	/** Füllt das Werte-Array */
 	protected function setWerte($arr){
