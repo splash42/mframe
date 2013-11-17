@@ -21,8 +21,6 @@ class Request{
 			$data 	= func_get_arg(1);
 		}
 		
-		echo $data;
-		
 		// cURL-Aufruf
 		$req 	= curl_init();
 		
