@@ -1,6 +1,7 @@
 <?
 class Request{
 	private $useragent	= null;
+	private $header		= array();
 	
 	private $auth	= false;
 	private $user	= '';
@@ -35,7 +36,10 @@ class Request{
 			curl_setopt($req, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 			curl_setopt($req, CURLOPT_USERPWD, $this->user.":".$this->pass);
 		}
-		curl_setopt($req, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+		
+		if(sizeof($this->header)>0){
+			curl_setopt($req, CURLOPT_HTTPHEADER, $this->header);			
+		}
 		curl_setopt($req, CURLOPT_RETURNTRANSFER, 1);
 		
 		// Request
@@ -48,6 +52,10 @@ class Request{
 	/** Setzt einen User-Agent für alle Requests */
 	public function setUserAgent($ua){
 		$this->useragent	= $ua;	
+	}
+	
+	public function addHeader($type,$content){
+		array_push($this->header, $type.": ".$content);
 	}
 	
 	/** Setzt die Login-Daten für ein Auth-Zugriff */
