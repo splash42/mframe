@@ -33,7 +33,10 @@ class Mail {
 
 	/** Setzen von E-Mail-Attributen */
 	public function set($field,$value){
-				
+		
+		// Umlaute (base64-kodiert)
+		// $subject	= "=?UTF-8?B?".base64_encode("BETREFF")."?=";
+		
 		// Fieldcheck
 		switch($field){
 			case "subject":
